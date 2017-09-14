@@ -8,7 +8,6 @@ class Graph():
  
     def addEdge(self,u,v):
         self.graph[u].append(v)
-        print self.graph
  
     def isCyclicUtil(self, v, visited, recStack):
  
@@ -40,15 +39,26 @@ class Graph():
             if visited[node] == False:
                 if self.isCyclicUtil(node,visited,recStack) == True:
                     return True
-        return False	
+        return False
+
+
+# Read schedule from file
 file=open("/home/isea/Desktop/prateek/programlab/schedule","r")
+
+# Store schedule in list s 
 s=file.readlines()
 sno=0
 x=0
+# Count no of transection in schedule
 for k in s:
 	if int(k[1])>sno :
 		sno=int(k[1])
+
+# Create a Graph class object		
 g = Graph(sno)
+
+
+# Perform precedence graph algorithm and create graph
 for i in s:
 	j=0
 	while j<len(s):
@@ -57,6 +67,8 @@ for i in s:
 					g.addEdge(int(i[1]),int(s[j][1]))
 			j=j+1		
 	x=x+1
+	
+# Check graph is cyclic or not	
 					
 if g.isCyclic()==1:
     print "Graph is not conflict serializable"
