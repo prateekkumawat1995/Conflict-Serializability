@@ -20,11 +20,11 @@ class Graph():
         # Recur for all neighbours
         # if any neighbour is visited and in 
         # recStack then graph is cyclic
-        for neighbour in self.graph[v]:
-            if visited[neighbour] == False:
-                if self.isCyclicUtil(neighbour, visited, recStack) == True:
+        for neighbour in self.graph[v+1]:
+            if visited[neighbour-1] == False:
+                if self.isCyclicUtil(neighbour-1, visited, recStack) == True:
                     return True
-            elif recStack[neighbour] == True:
+            elif recStack[neighbour-1] == True:
                 return True
  
         # The node needs to be poped from 
@@ -56,8 +56,9 @@ for i in s:
 				if ((s[j][2]==i[2] and s[j][1]!=i[1]) and (i[0]!='r' or s[j][0]!='r')) :
 					g.addEdge(int(i[1]),int(s[j][1]))
 			j=j+1		
-	x=x+1				
-if g.isCyclic() == 1:
+	x=x+1
+					
+if g.isCyclic()==1:
     print "Graph has a cycle"
 else:
     print "Graph has no cycle"
