@@ -59,6 +59,6 @@ for i in s:
 	x=x+1
 					
 if g.isCyclic()==1:
-    print "Graph has a cycle"
+    print "Graph is not conflict serializable"
 else:
-    print "Graph has no cycle"
+    print "Graph is conflict serializable"
