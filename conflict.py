@@ -9,7 +9,7 @@ class Graph():
     def addEdge(self,u,v):
         self.graph[u].append(v)
  
-    def isCyclicUtil(self, v, visited, recStack):
+    def isCyclicUtil(self, v, visited, recStack, stack):
  
         # Mark current node as visited and 
         # adds to recursion stack
@@ -21,7 +21,7 @@ class Graph():
         # recStack then graph is cyclic
         for neighbour in self.graph[v+1]:
             if visited[neighbour-1] == False:
-                if self.isCyclicUtil(neighbour-1, visited, recStack) == True:
+                if self.isCyclicUtil(neighbour-1, visited, recStack, stack) == True:
                     return True
             elif recStack[neighbour-1] == True:
                 return True
@@ -29,17 +29,21 @@ class Graph():
         # The node needs to be poped from 
         # recursion stack before function ends
         recStack[v] = False
+        stack.insert(0,v+1)
         return False
  
     # Returns true if graph is cyclic else false
     def isCyclic(self):
         visited = [False] * self.V
         recStack = [False] * self.V
+        stack = []
         for node in range(self.V):
             if visited[node] == False:
-                if self.isCyclicUtil(node,visited,recStack) == True:
-                    return True
-        return False
+                if self.isCyclicUtil(node,visited,recStack,stack) == True:
+                    print "Graph is not conflict serializable"
+                    return 1
+        print "Graph is conflict serializable\n"
+        print stack
 
 
 # Read schedule from file
@@ -68,9 +72,9 @@ for i in s:
 			j=j+1		
 	x=x+1
 	
-# Check graph is cyclic or not	
+# Check graph is cyclic or not. If not cyclic then print the order of the schedule	
 					
-if g.isCyclic()==1:
-    print "Graph is not conflict serializable"
-else:
-    print "Graph is conflict serializable"
+g.isCyclic()
+
+
+#end of file
