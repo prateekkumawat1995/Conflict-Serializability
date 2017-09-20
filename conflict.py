@@ -40,10 +40,16 @@ class Graph():
         for node in range(self.V):
             if visited[node] == False:
                 if self.isCyclicUtil(node,visited,recStack,stack) == True:
+		    print "******************************************"
                     print "Graph is not conflict serializable"
+		    print "******************************************"  
                     return 1
-        print "Graph is conflict serializable\n"
-        print stack
+	print "******************************************"
+        print "Graph is conflict serializable"
+        print "******************************************"
+	print "**************************************************************************************************"
+        print "The given schedule is conflict equivalent to\t",stack,"\tserial schedule"
+	print "**************************************************************************************************"
 
 
 # Read schedule from file
